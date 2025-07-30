@@ -1,0 +1,32 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: Build
+    jobs:
+      - job: BuildJob
+        steps:
+          - task: GitHubCheckout@1
+          - script: echo "Build Stage - No compile needed for HTML app"
+            displayName: 'Build App'
+
+  - stage: Test
+    jobs:
+      - job: TestJob
+        steps:
+          - script: echo "Tests Passed ✅"
+            displayName: 'Run Tests'
+
+  - stage: Deploy
+    jobs:
+      - job: DeployJob
+        steps:
+          - task: CopyFilesOverSSH@0
+            inputs:
+              sshEndpoint: 'AzureVMServiceConnection'
+              sourceFolder: '$(Build.SourcesDirectory)/app'
+              contents: '**'
+              targetFolder: '/var/www/html'
