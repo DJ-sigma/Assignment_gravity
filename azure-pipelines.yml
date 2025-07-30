@@ -1,5 +1,5 @@
 trigger:
-  - main
+  - main  
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -9,16 +9,16 @@ stages:
     jobs:
       - job: BuildJob
         steps:
-          - task: GitHubCheckout@1
-          - script: echo "Build Stage - No compile needed for HTML app"
+          - checkout: self  
+          - script: echo 
             displayName: 'Build App'
 
   - stage: Test
     jobs:
       - job: TestJob
         steps:
-          - script: echo "Tests Passed ✅"
-            displayName: 'Run Tests'
+          - script: echo 
+            displayName: 'Run Mock Tests'
 
   - stage: Deploy
     jobs:
@@ -26,7 +26,7 @@ stages:
         steps:
           - task: CopyFilesOverSSH@0
             inputs:
-              sshEndpoint: 'AzureVMServiceConnection'
-              sourceFolder: '$(Build.SourcesDirectory)/app'
+              sshEndpoint: 'AzureVMServiceConnection'  # create this in Azure DevOps
+              sourceFolder: '$(Build.SourcesDirectory)/app'  # adjust to match your folder
               contents: '**'
               targetFolder: '/var/www/html'
