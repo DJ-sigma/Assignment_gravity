@@ -1,0 +1,12 @@
+variable "resource_group_name" {}
+variable "location" {}
+variable "vnet_name" {}
+variable "address_space" {}
+variable "public_subnet_name" {}
+variable "public_subnet_cidr" {}
+variable "private_subnet_name" {}
+variable "private_subnet_cidr" {}
+variable "nsg_name" {}
+variable "vm_name" {}
+variable "admin_username" {}
+variable "admin_password" {}
